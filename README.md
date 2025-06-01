@@ -1,106 +1,99 @@
-Com base no que já desenvolveste e na descrição do enunciado do trabalho (`trabalho_TP2_pt.pdf`), aqui tens um **README.md** bem estruturado para colocares no GitHub:
+# AGV Logistics 3D Visualization
+
+Visualização Interativa de uma Área Logística em 3D baseada em dados reais de um AGV.
 
 ---
 
-# **AGV Logistics View 3D**
+## Descrição
 
-Visualização Interativa de Área Logística em 3D com Paletes Texturizadas
-
-Este repositório contém a implementação de uma aplicação desenvolvida no âmbito da unidade curricular de **Computação Gráfica e Multimédia**, do curso de **Engenharia Informática**. O projeto simula visualmente uma área logística analisada por um robot AGV, utilizando a biblioteca **Three.js** para renderização 3D em ambiente web.
+Este projeto foi desenvolvido para a unidade curricular de **Computação Gráfica** (Engenharia Informática) e consiste na criação de um modelo 3D interativo de uma área logística, a partir de uma imagem raster captada por um AGV (robot móvel).  
+O objetivo é representar fielmente o ambiente, incluindo paletes com texturas realistas, e permitir a navegação livre pelo utilizador.
 
 ---
 
-## Objetivo
+## Objetivos do Projeto
 
-O principal objetivo deste projeto é:
-
--   Criar um modelo 3D **interativo e visual** de uma área logística baseada numa imagem de mapeamento por laser.
--   Representar **paletes 3D com texturas realistas** e etiquetas visuais.
--   Aplicar **conceitos de Computação Gráfica**, **Texturas**, **Material Mapping** e **Controlo de Câmaras** com interatividade.
--   Desenvolver a aplicação com **Programação Orientada a Objetos** em JavaScript.
+-   Visualizar em 3D a área logística a partir da imagem do AGV.
+-   Representar duas paletes 3D nas posições e dimensões indicadas no enunciado.
+-   Aplicar textura de cartão com o texto “ALTERNATORS XPTO MY COMPANY INC” nas faces laterais das paletes.
+-   Preencher o topo das paletes com várias imagens de alternadores, conforme necessário.
+-   Permitir navegação e interação com a cena usando **TrackballControls**.
+-   Utilizar **Three.js** e programação orientada a objetos.
 
 ---
 
 ## Funcionalidades
 
--   📦 Representação de **paletes 3D** com faces texturizadas tipo cartão e imagem de alternadores no topo.
--   🗺️ Renderização da **imagem do mapa da área logística** como base do cenário.
--   🎮 Navegação com **TrackballControls**: zoom, rotação e movimentação da câmara.
--   🖱️ Interface gráfica com **lil-gui** para controlar a visualização:
-
-    -   Ver palete
-    -   Ver cena logística completa
-    -   Limpar cena
-    -   Trocar entre câmara perspetiva e ortográfica
+-   **Paletes 3D realistas**: Faces laterais com textura de cartão e texto, topo preenchido com imagens de alternadores.
+-   **Base da cena**: Imagem do mapa logístico como textura do chão.
+-   **Interatividade**: Zoom, rotação e pan com TrackballControls.
+-   **Câmaras**: Alternância entre perspetiva e ortográfica.
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias
 
--   **JavaScript ES6**
--   **Three.js** – Motor gráfico WebGL
--   **lil-gui** – Interface gráfica para controlo
--   **HTML5 / CSS3**
--   **Canvas 2D** – Geração de texturas com texto
+-   [Three.js](https://threejs.org/) (WebGL)
+-   JavaScript ES6
+-   HTML5 / CSS3
+-   Canvas 2D (para texturas com texto)
+-   lil-gui (opcional, para interface gráfica)
 
 ---
 
 ## Estrutura do Projeto
 
-```bash
-trabalho/
+```
+CG-project-2/
 │
-├── Caixa.js             # Classe da palete com textura lateral e imagem no topo
-├── Scene.js             # Classe que representa o cenário com o mapa da área
-├── Webgl.js             # Inicialização da cena, renderer, câmara e luzes
-├── MyGui.js             # Interface GUI com botões de controlo
-├── projeto.html         # Ficheiro HTML principal
-├── imgs/                # Imagens usadas como texturas (mapa, cartão, alternador)
-│
-└── README.md            # Este documento
+├── Caixa.js         # Classe da palete (MyBox)
+├── Scene.js         # Classe do cenário logístico (MyScene)
+├── Webgl.js         # Inicialização de renderer, câmara, luzes, controlos
+├── MyGui.js         # Interface gráfica (opcional)
+├── projeto.html     # HTML principal
+├── imgs/            # Imagens: mapa, cartão, alternador
+└── README.md
 ```
 
 ---
 
-## Como Executar o Projeto
+## Como Executar
 
-1. **Clonar o repositório:**
-
-```bash
-git clone https://github.com/o_teu_utilizador/cgm-logistics-view.git
-```
-
-2. **Navegar para o diretório do projeto:**
-
-```bash
-cd cgm-logistics-view
-```
-
-3. **Abrir o `projeto.html` no browser:**
-
-Podes abrir diretamente no Chrome, Edge ou Firefox (sem servidor).
+1. **Clona o repositório:**
+    ```bash
+    git clone https://github.com/Pelinho03/CG-project-2.git
+    ```
+2. **Abre o diretório do projeto:**
+    ```bash
+    cd CG-project-2
+    ```
+3. **Abre o `projeto.html` no browser** (Chrome, Edge ou Firefox).
+    > Não é necessário servidor local.
 
 ---
 
 ## Imagens Utilizadas
 
--   `mapa_area_logistica.png` — Mapa fornecido pelo AGV para base do ambiente.
--   `cardboard.jpg` — Textura de cartão para as faces laterais das paletes.
--   `alternador.png` — Imagem do alternador usada para texturizar o topo.
+-   `imgs/mapa_area_logistica.png` — Mapa do AGV (base do cenário)
+-   `imgs/cardboard.jpg` — Textura de cartão (faces laterais das paletes)
+-   `imgs/alternador.png` — Alternador (topo das paletes)
 
 ---
 
-## Ideia Central
+## Notas Técnicas
 
-> O projeto recria em 3D um espaço real mapeado por sensores de um AGV, aplicando visualmente a lógica de deteção de obstáculos e organização logística, combinando **visualização interativa**, **representação tridimensional** e **realismo através de texturas**.
+-   O número de imagens de alternadores no topo das paletes é ajustado automaticamente para preencher toda a superfície.
+-   O texto nas faces laterais é desenhado dinamicamente sobre a textura de cartão.
+-   As paletes são posicionadas e orientadas conforme o enunciado.
+-   A iluminação foi ajustada para garantir contraste e realismo sem saturar as texturas.
 
 ---
 
-## Desenvolvido por
+## Autor
 
-**Paulo Guimarães**
+**Paulo Guimarães**  
 [GitHub](https://github.com/Pelinho03)
 
 ---
 
-Se quiseres também te posso gerar a descrição curta para colocar na secção "About" do repositório GitHub. Queres que o faça?
+> Projeto académico — Computação Gráfica, 2025
