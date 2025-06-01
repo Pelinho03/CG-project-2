@@ -3,7 +3,7 @@
 import * as THREE from "three";
 
 export class MyBox extends THREE.Object3D {
-    constructor(lc, ac, ec, cc) {
+    constructor(larguraCaixa, alturaCaixa, expessuraCaixa, comprimentoCaixa) {
         super();
 
         //-----------------------------------//
@@ -72,7 +72,11 @@ export class MyBox extends THREE.Object3D {
             // Criar a caixa
             //-----------------------------------//
             const caixa = new THREE.Mesh(
-                new THREE.BoxGeometry(lc, ac, cc),
+                new THREE.BoxGeometry(
+                    larguraCaixa,
+                    alturaCaixa,
+                    comprimentoCaixa
+                ),
                 materiais
             );
             caixa.castShadow = true;

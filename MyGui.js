@@ -36,7 +36,7 @@ export class MyGui {
             },
             verCena: () => {
                 // this.webgl.scene.add(new THREE.AxesHelper(50));
-                const cena = new MyScene(56300, 10, 53800); //la, aa, ca //lc, ac, ec, cc
+                const cena = new MyScene(56300, 20, 53800); //lc, ac, cc
                 this.webgl.scene.add(cena);
             },
             Perspectiva: "Perspectiva",
@@ -60,12 +60,10 @@ export class MyGui {
         const limparCena = gui.add(guiVars, "limparCena").name("Limpar Cena");
         const verCaixa = gui.add(guiVars, "verCaixa").name("Ver Caixa");
         const verCena = gui.add(guiVars, "verCena").name("Ver Cena");
-        const camTrocar = gui
-            .add(guiVars, "switchCamera")
-            .name("Trocar Camera");
-        const camPerspetiva = gui.add(guiVars, "Perspectiva").listen();
-        // camera.lookAt(scene.position);
-        // render();
+        // const camTrocar = gui
+        //     .add(guiVars, "switchCamera")
+        //     .name("Trocar Camera");
+        // const camPerspetiva = gui.add(guiVars, "Perspectiva").listen();
 
         trackballControls.onChange((value) => {
             this.webgl.trackballControls.enabled =
