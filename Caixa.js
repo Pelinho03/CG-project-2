@@ -12,7 +12,14 @@ export class MyBox extends THREE.Object3D {
         const textureLoader = new THREE.TextureLoader();
 
         const texturaCartao = textureLoader.load("imgs/cardboard.jpg");
-        const texturaTopo = textureLoader.load("imgs/alternador.png");
+        const texturaTopo = textureLoader.load(
+            "imgs/alternador.png",
+            (texture) => {
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(2, 3); // 3  horizontal, 2 vertical
+            }
+        );
         //-----------------------------------//
 
         //-----------------------------------//
