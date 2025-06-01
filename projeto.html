@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto de CG</title>
-    <script type="importmap">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta rel="stylesheet" href="styles.css">
+  <title>Projeto de CG</title>
+  <script type="importmap">
     {
       "imports": {
         "three":         "https://unpkg.com/three@0.161.0/build/three.module.js",
@@ -17,27 +18,27 @@
 
 <body>
 
-    <!-- Canvas for Webgl Output -->
-    <canvas id="WebGL-canvas"></canvas>
+  <!-- Canvas for Webgl Output -->
+  <canvas id="WebGL-canvas"></canvas>
 
-    <script type="module">
+  <script type="module">
 
-        'use strict';
+    'use strict';
 
-        import { Webgl } from './Webgl.js';
-        import { MyGui } from './MyGui.js';
+    import { Webgl } from './Webgl.js';
+    import { MyGui } from './MyGui.js';
 
-        const webgl = new Webgl();
-        const mygui = new MyGui(webgl);
+    const webgl = new Webgl();
+    const mygui = new MyGui(webgl);
 
-        render();
+    render();
 
-        function render() {
-            requestAnimationFrame(render);
-            webgl.render();
-        }
+    function render() {
+      requestAnimationFrame(render);
+      webgl.render();
+    }
 
-    </script>
+  </script>
 </body>
 
 </html>
