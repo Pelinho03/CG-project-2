@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { Webgl } from "./Webgl.js";
 import { MyBox } from "./Caixa.js";
+import { MyScene } from "./Scene.js";
 
 export class MyGui {
     webgl;
@@ -11,6 +12,9 @@ export class MyGui {
     constructor(webgl) {
         this.webgl = webgl;
 
+        //-----------------------------------//
+        // dimensões e opções
+        //-----------------------------------//
         const guiVars = {
             trackballControls: true,
             limparCena: () => {
@@ -27,9 +31,13 @@ export class MyGui {
             },
             verCaixa: () => {
                 // this.webgl.scene.add(new THREE.AxesHelper(50));
-
-                const caixa1 = new MyBox(1400, 1000, 10, 1400); //lc, ac, ec, cc
+                const caixa1 = new MyBox(1410, 1000, 10, 1400); //lc, ac, ec, cc
                 this.webgl.scene.add(caixa1);
+            },
+            verCena: () => {
+                // this.webgl.scene.add(new THREE.AxesHelper(50));
+                const cena = new MyScene(56300, 10, 53800); //la, aa, ca //lc, ac, ec, cc
+                this.webgl.scene.add(cena);
             },
             Perspectiva: "Perspectiva",
             switchCamera: () => {
@@ -40,13 +48,18 @@ export class MyGui {
                         : "Orthographic";
             },
         };
+        //-----------------------------------//
 
+        //-----------------------------------//
+        // Menu
+        //-----------------------------------//
         const gui = new GUI();
         const trackballControls = gui
             .add(guiVars, "trackballControls")
             .name("Trackball");
         const limparCena = gui.add(guiVars, "limparCena").name("Limpar Cena");
         const verCaixa = gui.add(guiVars, "verCaixa").name("Ver Caixa");
+        const verCena = gui.add(guiVars, "verCena").name("Ver Cena");
         const camTrocar = gui
             .add(guiVars, "switchCamera")
             .name("Trocar Camera");
@@ -58,5 +71,6 @@ export class MyGui {
             this.webgl.trackballControls.enabled =
                 !this.webgl.trackballControls.enabled;
         });
+        //-----------------------------------//
     }
 }

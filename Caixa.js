@@ -6,11 +6,18 @@ export class MyBox extends THREE.Object3D {
     constructor(lc, ac, ec, cc) {
         super();
 
+        //-----------------------------------//
+        // Carregar a imagens
+        //-----------------------------------//
         const textureLoader = new THREE.TextureLoader();
 
         const texturaCartao = textureLoader.load("imgs/cardboard.jpg");
         const texturaTopo = textureLoader.load("imgs/alternador.png");
+        //-----------------------------------//
 
+        //-----------------------------------//
+        // Criar o texto com textura de fundo
+        //-----------------------------------//
         const canvasTexto = document.createElement("canvas");
         canvasTexto.width = 512;
         canvasTexto.height = 128;
@@ -20,7 +27,6 @@ export class MyBox extends THREE.Object3D {
         imagemDeFundo.src = "imgs/cardboard.jpg";
 
         imagemDeFundo.onload = () => {
-            // desenhar fundo
             ctx.drawImage(
                 imagemDeFundo,
                 0,
@@ -29,7 +35,6 @@ export class MyBox extends THREE.Object3D {
                 canvasTexto.height
             );
 
-            // desenhar texto
             ctx.font = "bold 20px Arial";
             ctx.fillStyle = "#222";
             ctx.textAlign = "center";
@@ -41,26 +46,47 @@ export class MyBox extends THREE.Object3D {
             );
 
             const texturaTexto = new THREE.CanvasTexture(canvasTexto);
+            //-----------------------------------//
 
-            // Criar materiais para cada face
+            //-----------------------------------//
+            // criar os materiais
+            //-----------------------------------//
             const materiais = [
                 new THREE.MeshStandardMaterial({ map: texturaTexto }), // Right face (X+)
                 new THREE.MeshStandardMaterial({ map: texturaTexto }), // Left face (X-)
                 new THREE.MeshStandardMaterial({ map: texturaTopo }), // Top face (Y+)
                 new THREE.MeshStandardMaterial({ map: texturaCartao }), // Bottom face (Y-)
-                new THREE.MeshStandardMaterial({ map: texturaCartao }), // Front face (Z+)
-                new THREE.MeshStandardMaterial({ map: texturaCartao }), // Back face (Z-)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Front face (Z+)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Back face (Z-)
             ];
+            //-----------------------------------//
 
+            //-----------------------------------//
+            // Criar a caixa
+            //-----------------------------------//
             const caixa = new THREE.Mesh(
                 new THREE.BoxGeometry(lc, ac, cc),
                 materiais
             );
-
             caixa.castShadow = true;
             caixa.receiveShadow = true;
 
             this.add(caixa);
+            //-----------------------------------//
         };
     }
+    //-----------------------------------//
+    // Método para criar um mesh com material normal e wireframe
+    //-----------------------------------//
+    createMesh(geom, texture) {
+        const meshMaterial = new THREE.MeshStandardMaterial({
+            map: texture, // Aplica a imagem como textura
+            roughness: 0.5,
+            metalness: 0.1,
+        });
+
+        const mesh = new THREE.Mesh(geom, meshMaterial);
+        return mesh;
+    }
+    //-----------------------------------//
 }

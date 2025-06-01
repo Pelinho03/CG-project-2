@@ -13,7 +13,9 @@ export class Webgl {
     constructor() {
         this.clock = new THREE.Clock();
 
+        //-----------------------------------//
         // create a render and set the size
+        //-----------------------------------//
         const canvas = document.querySelector("#WebGL-canvas");
         this.renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
         this.renderer.useLegacyLights = true;
@@ -23,73 +25,93 @@ export class Webgl {
 
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x555555);
+        //-----------------------------------//
 
+        //-----------------------------------//
         // create camera, position and point the camera to the center of the scene
+        //-----------------------------------//
         this.camera = new THREE.PerspectiveCamera(
-            40,
+            60,
             window.innerWidth / window.innerHeight,
             0.1,
-            20000
+            200000
         );
-        this.camera.position.set(0, 2000, -4000); // x y z
+        this.camera.position.set(0, 90000, 0); // Vista de topo
+        this.camera.up.set(0, 0, -1); // Garante que o topo da cena está para cima no ecrã
         this.camera.lookAt(0, 0, 0);
 
         this.trackballControls = new TrackballControls(
             this.camera,
             this.renderer.domElement
         );
+        //-----------------------------------//
 
-        // Luz direcional
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(500, 1000, 500); // Posição da luz
-        light.castShadow = true; // Habilitar sombras
-        light.shadow.mapSize.width = 2048;
-        light.shadow.mapSize.height = 2048;
-        light.shadow.camera.near = 0.5;
-        light.shadow.camera.far = 3000;
-        this.scene.add(light);
+        //-----------------------------------//
+        // Carregar luz
+        //-----------------------------------//
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
+        dirLight.position.set(40000, 120000, 40000);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 4096;
+        dirLight.shadow.mapSize.height = 4096;
+        dirLight.shadow.camera.near = 1000;
+        dirLight.shadow.camera.far = 300000;
+        dirLight.shadow.camera.left = -80000;
+        dirLight.shadow.camera.right = 80000;
+        dirLight.shadow.camera.top = 80000;
+        dirLight.shadow.camera.bottom = -80000;
+        this.scene.add(dirLight);
+        //-----------------------------------//
 
-        // Luz ambiente
-        const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Cor e intensidade
+        //-----------------------------------//
+        // Carregar luz ambiente
+        //-----------------------------------//
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         this.scene.add(ambientLight);
 
         this.trackballControls.rotateSpeed = 10.0;
         this.trackballControls.zoomSpeed = 1.0;
         this.trackballControls.panSpeed = 1.0;
         this.trackballControls.staticMoving = true;
+        //-----------------------------------//
     }
+
     //-----------------------------------//
     // Método para alternar entre câmeras
     //-----------------------------------//
     switchCamera() {
         const aspect = window.innerWidth / window.innerHeight;
 
-        if (this.camera instanceof THREE.PerspectiveCamera) {
-            // Alternar para câmera ortográfica
-            const viewSize = 1000; // Ajuste o tamanho da visualização
-            this.camera = new THREE.OrthographicCamera(
-                -aspect * viewSize, // left
-                aspect * viewSize, // right
-                viewSize, // top
-                -viewSize, // bottom
-                0.1, // near
-                20000 // far
-            );
-            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
-            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
-        } else {
-            // Alternar para câmera perspectiva
-            this.camera = new THREE.PerspectiveCamera(
-                45,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                20000
-            );
-            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
-            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
+        if (this.trackballControls) {
+            this.trackballControls.dispose();
+            this.trackballControls = null;
         }
 
-        // Atualizar os controles para usar a nova câmera
+        if (this.camera instanceof THREE.PerspectiveCamera) {
+            const viewSize = 60000;
+            this.camera = new THREE.OrthographicCamera(
+                -aspect * viewSize,
+                aspect * viewSize,
+                viewSize,
+                -viewSize,
+                0.1,
+                200000
+            );
+            this.camera.position.set(0, 90000, 0);
+            this.camera.up.set(0, 0, -1);
+            this.camera.lookAt(0, 0, 0);
+        } else {
+            this.camera = new THREE.PerspectiveCamera(
+                60,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                200000
+            );
+            this.camera.position.set(0, 90000, 0);
+            this.camera.up.set(0, 0, -1);
+            this.camera.lookAt(0, 0, 0);
+        }
+
         this.trackballControls.object = this.camera;
     }
     //-----------------------------------//
