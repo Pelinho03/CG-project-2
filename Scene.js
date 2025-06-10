@@ -48,7 +48,7 @@ export class MyScene extends THREE.Object3D {
             expessuraCaixa,
             comprimentoCaixa
         );
-        caixa1.add(new THREE.AxesHelper(1000));
+        // caixa1.add(new THREE.AxesHelper(1000));
         caixa1.position.set(
             -larguraCaixa * 6 + expessuraCaixa,
             alturaCaixa / 2,
@@ -62,7 +62,7 @@ export class MyScene extends THREE.Object3D {
             expessuraCaixa,
             comprimentoCaixa
         );
-        caixa2.add(new THREE.AxesHelper(1000));
+        // caixa2.add(new THREE.AxesHelper(1000));
         caixa2.position.set(
             -expessuraCaixa * 3,
             alturaCaixa / 2,

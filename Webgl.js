@@ -36,8 +36,8 @@ export class Webgl {
             0.1,
             90000
         );
-        this.camera.position.set(0, 50000, 0); // Vista de topo
-        this.camera.up.set(0, 0, -1); // Garante que o topo da cena está para cima no ecrã
+        this.camera.position.set(0, 50000, 0);
+        this.camera.up.set(0, 0, -1);
         this.camera.lookAt(0, 0, 0);
 
         this.trackballControls = new TrackballControls(
@@ -79,46 +79,6 @@ export class Webgl {
         this.trackballControls.staticMoving = true;
         //-----------------------------------//
     }
-
-    //-----------------------------------//
-    // Método para alternar entre câmeras
-    //-----------------------------------//
-    switchCamera() {
-        const aspect = window.innerWidth / window.innerHeight;
-
-        if (this.trackballControls) {
-            this.trackballControls.dispose();
-            this.trackballControls = null;
-        }
-
-        if (this.camera instanceof THREE.PerspectiveCamera) {
-            const viewSize = 60000;
-            this.camera = new THREE.OrthographicCamera(
-                -aspect * viewSize,
-                aspect * viewSize,
-                viewSize,
-                -viewSize,
-                0.1,
-                200000
-            );
-            this.camera.position.set(0, 90000, 0);
-            this.camera.up.set(0, 0, -1);
-            this.camera.lookAt(0, 0, 0);
-        } else {
-            this.camera = new THREE.PerspectiveCamera(
-                60,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                200000
-            );
-            this.camera.position.set(0, 90000, 0);
-            this.camera.up.set(0, 0, -1);
-            this.camera.lookAt(0, 0, 0);
-        }
-
-        this.trackballControls.object = this.camera;
-    }
-    //-----------------------------------//
 
     //-----------------------------------//
     // Método para desativar os controlos
