@@ -39,14 +39,6 @@ export class MyGui {
                 const cena = new MyScene(56300, 20, 53800); //lc, ac, cc
                 this.webgl.scene.add(cena);
             },
-            Perspectiva: "Perspectiva",
-            switchCamera: () => {
-                this.webgl.switchCamera();
-                guiVars.Perspectiva =
-                    this.webgl.camera instanceof THREE.PerspectiveCamera
-                        ? "Perspectiva"
-                        : "Orthographic";
-            },
         };
         //-----------------------------------//
 

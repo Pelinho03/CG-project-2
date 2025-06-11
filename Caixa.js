@@ -17,7 +17,7 @@ export class MyBox extends THREE.Object3D {
             (texture) => {
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
-                texture.repeat.set(2, 3); // 3  horizontal, 2 vertical
+                texture.repeat.set(2, 3); // 2  horizontal,3 vertical
             }
         );
         //-----------------------------------//
@@ -59,12 +59,12 @@ export class MyBox extends THREE.Object3D {
             // criar os materiais
             //-----------------------------------//
             const materiais = [
-                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Right face (X+)
-                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Left face (X-)
-                new THREE.MeshStandardMaterial({ map: texturaTopo }), // Top face (Y+)
-                new THREE.MeshStandardMaterial({ map: texturaCartao }), // Bottom face (Y-)
-                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Front face (Z+)
-                new THREE.MeshStandardMaterial({ map: texturaTexto }), // Back face (Z-)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // lado direito (X+)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // lado esquerdo (X-)
+                new THREE.MeshStandardMaterial({ map: texturaTopo }), // cima (Y+)
+                new THREE.MeshStandardMaterial({ map: texturaCartao }), // baixo (Y-)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // frente (Z+)
+                new THREE.MeshStandardMaterial({ map: texturaTexto }), // trás (Z-)
             ];
             //-----------------------------------//
 
